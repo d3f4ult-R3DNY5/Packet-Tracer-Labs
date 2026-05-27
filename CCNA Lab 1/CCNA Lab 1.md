@@ -18,15 +18,11 @@ The main provides services to the two clients in a B2B  connectivity, hosting X 
 
 ### Connections and Interfaces (Layer 2)
 
-<p align="center">
-  <img src="LAYER2-LAYER3-LAB1.drawio.svg" />
-</p>
+![](LAYER2-LAYER3-LAB1.drawio.svg)
 
 ### IP Addressing (Layer 3)
 
-<p align="center">
-  <img src="IP DIAGRAM.drawio.svg" />
-</p>
+![](IP%20DIAGRAM.drawio.svg)
 
 ---
 

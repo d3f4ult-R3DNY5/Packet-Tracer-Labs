@@ -27,39 +27,28 @@ The network is built with redundancy in mind — no single device failure should
 ---
 ## LAYOUT 1 (Development Teams)
 
-<p align="center">
-  <img src="Development-Team.drawio.svg" />
-</p>
-
+![](images/DEVELOPMENT-TEAM.drawio.svg)
 
 ## LAYOUT 2 (FTP Servers)
 
-<p align="center">
-  <img src="FTP.drawio.svg" />
-</p>
+![](images/FTP.drawio.svg)
 
 ## LAYOUT 4 (IT Team)
 
-<p align="center">
-  <img src="IT.drawio.svg" />
-</p>
+![](images/IT.drawio.svg)
 
 ## LAYOUT 5 (CORE  Network)
 
-<p align="center">
-  <img src="CORE.drawio.svg" />
-</p>
+![](images/CORE.drawio.svg)
 
 
 ## FINAL DIAGRAM 
 
-<p align="center">
-  <img src="FINAL.drawio.svg" />
-</p>
+![](images/FINAL.svg)
 
 ---
 ## Implementation 
 
 >[!NOTE]
 >#### Phase wise Implementation of the diagram 
->1. [Development Team](Development%20Team/Development%20Team.md)
+>1. [Development Team](parts/Development%20Team.md)
