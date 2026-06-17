@@ -83,6 +83,60 @@
 
 ### Access Ports and VLAN 
 
-| ACESS PORT | VLAN | DEVICES |
-| ---------- | ---- | ------- |
-|            |      |         |
+| ACCESS PORT | VLAN | DEVICES            |
+| ----------- | ---- | ------------------ |
+| F0/1-4      | 10   | DEV-AS-1, DEV-AS-3 |
+| F0/1-4      | 20   | DEV-AS-2, DEV-AS-4 |
+
+---
+
+## LAYER 3 CONFIGURATIONS 
+
+The DEV-DS-1 and the DEV-DS-2 servers provide IP address to the end hosts using DHCP  by acting as a DHCP relay agent to DEV-DHCP-1
+
+### ROUTING : OSPF 
+
+#### DEV-DS-1
+
+| Interface Name | IP address                  |
+| -------------- | --------------------------- |
+| vlan 10        | 10.0.0.2, VIP : 10.0.0.1    |
+| vlan 20        | 10.0.0.129, VIP: 10.0.0.130 |
+| vlan 1         | 192.168.1.6                 |
+
+#### DEV-DS-2
+
+| Interface Name | IP address                  |
+| -------------- | --------------------------- |
+| vlan 10        | 10.0.0.3, VIP : 10.0.0.1    |
+| vlan 20        | 10.0.0.131, VIP: 10.0.0.130 |
+| vlan 1         | 192.168.1.7                 |
+
+#### DEV-CS-2
+
+| Interface Name | IP address  |
+| -------------- | ----------- |
+| vlan 1         | 192.168.1.5 |
+
+#### DEV-CS-1
+
+| Interface Name | IP address  |
+| -------------- | ----------- |
+| vlan 1         | 192.168.1.4 |
+
+#### DEV-AR-1
+
+| Interface Name | IP address  |
+| -------------- | ----------- |
+| G0/1           | 192.168.1.2 |
+
+#### DEV-AR-2
+
+| Interface Name | IP address  |
+| -------------- | ----------- |
+| G0/1           | 192.168.1.2 |
+#### DEV-DHCP-1
+
+| Interface Name | IP address  |
+| -------------- | ----------- |
+| G0/0           | 192.168.1.1 |
