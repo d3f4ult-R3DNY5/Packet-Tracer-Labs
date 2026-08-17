@@ -16,10 +16,10 @@ The purpose of this project is to build and explore networking lab scenarios as 
 
 
 
-| S.no | Folder Name                                    | Date Started | Date Completed |
-| ---- | ---------------------------------------------- | ------------ | -------------- |
-| 1    | [CCNA Lab 1](CCNA%20Lab%201/CCNA%20Lab%201.md) | 03/04/2026   | 17/04/2026     |
-| 2    | [CCNA Lab 2](CCNA%20Lab%202/CCNA%20Lab%202.md)                                 | 02/05/2026   | Ongoing        |
+| S.no | Folder Name                                    | Date Started | Date Completed                |
+| ---- | ---------------------------------------------- | ------------ | ----------------------------- |
+| 1    | [CCNA Lab 1](CCNA%20Lab%201/CCNA%20Lab%201.md) | 03/04/2026   | 17/04/2026                    |
+| 2    | CCNA Lab 2                                     | 02/05/2026   | Scraped due to PT limitations |
 
 ## Credits 
 
