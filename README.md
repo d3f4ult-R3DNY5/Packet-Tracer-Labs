@@ -20,6 +20,7 @@ The purpose of this project is to build and explore networking lab scenarios as 
 | ---- | ---------------------------------------------- | ------------ | ----------------------------- |
 | 1    | [CCNA Lab 1](CCNA%20Lab%201/CCNA%20Lab%201.md) | 03/04/2026   | 17/04/2026                    |
 | 2    | CCNA Lab 2                                     | 02/05/2026   | Scraped due to PT limitations |
+| 3    | [[CCNA Lab 3/CCNA Lab 3\|CCNA Lab 3]]          | 14/10/2025   | Ongoing                       |
 
 ## Credits 
 
