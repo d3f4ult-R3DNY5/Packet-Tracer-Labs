@@ -16,15 +16,13 @@
 >[!note]
 >This based on best of my knowledge
 
-
+---
 ## Lab Topology 
 
-<img src="./Attachments/image_1791987399891.png" width="auto">
+<img src="image_1792070774659.png" width="auto">
 
 
-
-
-
+---
 
 
 
