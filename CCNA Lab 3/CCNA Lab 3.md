@@ -19,7 +19,7 @@
 ---
 ## Lab Topology 
 
-<img src="image_1792071626618.png" width="auto">
+<img src="topology.png" width="auto">
 
 ---
 
