@@ -19,8 +19,7 @@
 ---
 ## Lab Topology 
 
-<img src="image_1792070774659.png" width="auto">
-
+<img src="./CCNA Lab 3/Attachments/image_1792070993718.png" width="auto">
 
 ---
 
