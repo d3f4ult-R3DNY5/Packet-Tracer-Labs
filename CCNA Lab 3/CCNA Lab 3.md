@@ -1,6 +1,6 @@
 # CCNA Lab 3
 
->[!info]
+>[!NOTE]
 >This lab was built in pursuit of my CCNA Certification Learning and Tries to mimic the real world scenarios as closely as possible 
 
 
