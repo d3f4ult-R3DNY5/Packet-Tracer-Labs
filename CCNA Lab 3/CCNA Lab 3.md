@@ -19,7 +19,7 @@
 ---
 ## Lab Topology 
 
-![[TOPOLOGY.png]]
+<img src="image_1792071626618.png" width="auto">
 
 ---
 
