@@ -43,8 +43,16 @@ On the following switches i.e. `ASW1 ASW2 ASW3 ASW4` `DSW1 DSW2 DSW3 DSW4` `MGMS
 >[!NOTE]
 >For safety I have moved all of the unused ports in VLAN 404 and have disabled it 
 
+### Channel group configurations 
 
-
+| channel group | port channel | interfaces | mode                 | device(s)                 |
+| ------------- | ------------ | ---------- | -------------------- | ------------------------- |
+| 1             | Po1          | F0/3-4     | LACP passive , Trunk | ASW1 , ASW2 , ASW3 , ASW4 |
+| 2             | Po2          | F0/5-6     | LACP passive , Trunk | ASW1 , ASW2 , ASW3 , ASW4 |
+| 1             | Po1          | F0/1-2     | LACP active , Trunk  | DSW1 , DSW2 , DSW3 , DSW4 |
+| 2             | Po2          | F0/3-4     | LACP active , Trunk  | DSW1 , DSW2 , DSW3 , DSW4 |
+>[!NOTE]
+>Configuring all the Port channel to use the load balancing of SRC-DST-IP 
 
 
 
