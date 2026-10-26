@@ -55,4 +55,23 @@ On the following switches i.e. `ASW1 ASW2 ASW3 ASW4` `DSW1 DSW2 DSW3 DSW4` `MGMS
 >Configuring all the Port channel to use the load balancing of SRC-DST-IP 
 
 
+### Configuring to use STP 
+
+For the purpose of this networking LAB , The STP operating mode will will be the classic spanning tree ieee
+- `spanning-tree vlan [id] root primary ` has been configured on DSW1 and DSW3 for **VLAN 1 , 99 , 100 , 200**
+- `spanning-tree vlan [id] root secondary ` has been configured on DSW2 and DSW4 for **VLAN 1 , 99 , 100 , 200**
+- Spanning tree root guard has been configured on the Po1 and Po2 interfaces of DSW1 and DSW3
+- Spanning tree portfast has been configured on the following interfaces F0/1-2 on `ASW1 ASW2 ASW3 ASW4` For quick transitioning to the forwarding state 
+
+
+---
+
+## Layer 3 configurations 
+
+### Port-channel lad balancing method 
+- Configuring the port channel load balancing method to be source and destination IP  
+
+
+
+
 
