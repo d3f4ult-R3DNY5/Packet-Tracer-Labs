@@ -71,7 +71,83 @@ For the purpose of this networking LAB , The STP operating mode will will be the
 ### Port-channel lad balancing method 
 - Configuring the port channel load balancing method to be source and destination IP  
 
+### SVI Configurations for VLAN 100 and VLAN 200 
+
+| Interface | IP configurations | Subnet mask     | Devices |
+| --------- | ----------------- | --------------- | ------- |
+| VLAN 100  | 10.0.1.2          | 255.255.255.128 | DSW1    |
+| VLAN 200  | 10.0.1.130        | 255.255.255.128 | DSW1    |
+| VLAN 100  | 10.0.1.3          | 255.255.255.128 | DSW2    |
+| VLAN 200  | 10.0.1.131        | 255.255.255.128 | DSW2    |
+| VLAN 100  | 10.0.2.2          | 255.255.255.128 | DSW3    |
+| VLAN 200  | 10.0.2.130        | 255.255.255.128 | DSW3    |
+| VLAN 100  | 10.0.2.3          | 255.255.255.128 | DSW4    |
+| VLAN 200  | 10.0.2.131        | 255.255.255.128 | DSW4    |
+
+### Connections between CR1 and `[DSW1 , DSW2]`
+
+| Interface | IP configurations | Subnet mask     | Devices | Default Gateway |
+| --------- | ----------------- | --------------- | ------- | --------------- |
+| G0/1      | 172.16.0.2        | 255.255.255.248 | DSW1    | 172.16.0.1      |
+| G0/1      | 172.16.0.3        | 255.255.255.248 | DSW2    | 172.16.0.1      |
+| G0/0/0    | 172.16.0.1        | 255.255.255.248 | CR1     | N/A             |
 
 
+### Connections between CR2 and `[DSW3 , DSW4]`
+
+| Interface | IP configurations | Subnet mask     | Devices | Default Gateway |
+| --------- | ----------------- | --------------- | ------- | --------------- |
+| G0/1      | 172.16.1.2        | 255.255.255.248 | DSW1    | 172.16.0.1      |
+| G0/1      | 172.16.1.3        | 255.255.255.248 | DSW2    | 172.16.0.1      |
+| G0/0/0    | 172.16.1.1        | 255.255.255.248 | CR1     | N/A             |
+
+### Connections between CR1 CSW1 & CR2
+
+| Interface | IP configurations | Subnet mask     | Devices |
+| --------- | ----------------- | --------------- | ------- |
+| G1/0/1    | 172.16.2.1        | 255.255.255.248 | CSW1    |
+| G1/0/2    | 172.16.2.9        | 255.255.255.248 | CSW2    |
+| G0/0/1    | 172.16.2.2        | 255.255.255.248 | CR1     |
+| G0/0/1    | 172.16.2.10       | 255.255.255.248 | CR2     |
+
+### Configuring the management IP 
+
+| Interface  | IP configurations | Subnet mask     | Devices | Default Gateway |
+| ---------- | ----------------- | --------------- | ------- | --------------- |
+| vlan 99    | 192.168.100.1     | 255.255.255.0   | CSW1    | NA              |
+| vlan 99    | 192.168.100.2     | 255.255.255.0   | CONSW1  | 192.168.100.1   |
+| Loopback 0 | 192.168.100.100   | 255.255.255.255 | CR1     | NA              |
+| Loopback 0 | 192.168.100.200   | 255.255.255.255 | CR2     | NA              |
+| vlan 99    | 192.168.100.101   | 255.255.255.0   | CONSW2  | 192.168.100.100 |
+| vlan 99    | 192.168.100.201   | 255.255.255.0   | CONSW3  | 192.168.100.200 |
+| vlan 99    | 192.168.100.102   | 255.255.255.0   | DSW1    | NA              |
+| vlan 99    | 192.168.100.103   | 255.255.255.0   | DSW2    | NA              |
+| vlan 99    | 192.168.100.104   | 255.255.255.0   | ASW1    | 192.168.100.1   |
+| vlan 99    | 192.168.100.105   | 255.255.255.0   | ASW2    | 192.168.100.1   |
+| vlan 99    | 192.168.100.202   | 255.255.255.0   | DSW3    | NA              |
+| vlan 99    | 192.168.100.203   | 255.255.255.0   | DSW4    | NA              |
+| vlan 99    | 192.168.100.204   | 255.255.255.0   | ASW3    | 192.168.100.1   |
+| vlan 99    | 192.168.100.205   | 255.255.255.0   | ASW4    | 192.168.100.1   |
+
+### Configuring the multi area OSPF 
+#### Devices participating in the OSPF
+
+#### Area 1 
+
+>- DSW1
+>- DSW2
+>- CR1
+
+#### Area 2
+
+>- DSW3
+>- DSW4
+>- CR2
+
+#### Area 0 
+
+>- CR1
+>- CR2
+>- CSW1
 
 
