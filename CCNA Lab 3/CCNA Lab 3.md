@@ -24,6 +24,7 @@
 | HR-PC-1    | HR Department PC      |
 | HR-PC-2    | HR Department PC      |
 
+---
 ## Layer 2 Configurations 
 
 ### Port-channel configurations 
@@ -31,7 +32,20 @@
 | Device | Channel - Bundle | protocol/op-mode | Port channel interface |
 | ------ | ---------------- | ---------------- | ---------------------- |
 | ASW1   | F0/1, F0/2       | LACP passive     | Po1                    |
+| ASW2   | F0/1, F0/2       | LACP passive     | Po1                    |
 | DSW1   | F0/1, F0/2       | LACP active      | Po1                    |
+| DSW2   | F0/1, F0/2       | LACP active      | Po1                    |
+| ASW1   | F0/3, F0/4       | LACP passive     | Po2                    |
+| ASW2   | F0/3, F0/4       | LACP passive     | Po2                    |
+| DSW1   | F0/3, F0/4       | LACP active      | Po2                    |
+| DSW2   | F0/3, F0/4       | LACP active      | Po2                    |
+
+>[!NOTE]
+>Configuring the Port-Channel mode on the **Source and Destination IP** 
+
+##### Configuration Images 
+###### ASW1 ASW2 DSW1 DSW2
+<img src="ASW1-ASW2-DSW1-DSW2-EthCh.png" width="auto">
 
 ---
 ### VLAN configurations 
@@ -51,6 +65,8 @@ VLAN 404 - DISABLED
 | ---------- | ------------- |
 | SALES-PC-1 | 10            |
 | HR-PC-1    | 20            |
+| SALES-PC-2 | 10            |
+| HR-PC-2    | 20            |
 
 #### Trunk configurations 
 The following configurations are performed on the trunk ports of ASW1 , ASW2 , DSW1 and DSW2 
@@ -64,3 +80,79 @@ The following configurations are performed on the trunk ports of ASW1 , ASW2 , D
 - **Allowed VLAN : `[10,20,30,99]`**
 
 ---
+### Interface status 
+#### ASW1
+<img src="ASW1-INT-DESC.png" width="auto">
+
+#### ASW2
+<img src="ASW2-INT-DESC.png" width="auto">
+
+#### DSW1
+<img src="DSW1-INT-DESC.png" width="auto">
+
+#### DSW2
+<img src="DSW2-INT-DESC.png" width="auto">
+
+---
+### Spanning Tree Configurations
+
+The spanning tree protocol that is being used is the default spanning tree protocol **802.1D in PVST+ mode*
+
+| Device | VLAN | Bridge Priority   |
+| ------ | ---- | ----------------- |
+| DSW1   | 10   | 24586 (Primary)   |
+| DSW1   | 20   | 28692 (Secondary) |
+| DSW1   | 30   | 24606 (Primary)   |
+| DSW1   | 99   | 24675 (Primary)   |
+| DSW1   | 404  | 24980 (Primary)   |
+| DSW2   | 10   | 28682 (Secondary) |
+| DSW2   | 20   | 24596 (Primary)   |
+| DSW2   | 30   | 28702 (Secondary) |
+| DSW2   | 99   | 28771 (Secondary) |
+| DSW2   | 404  | 29706 (Primary )  |
+>[!NOTE]
+>For the VLAN 404 There is no proper spanning tree root as the trunk interfaces do not carry traffic for VLAN 404 
+## Layer 3 Configurations 
+
+### Management IP configurations on the devices 
+
+| Device name | IP address    | Subnet        | Default Gateway (If Applicable) |
+| ----------- | ------------- | ------------- | ------------------------------- |
+| ASW1        | 192.168.100.1 | 255.255.255.0 | 192.168.100.5                   |
+| ASW2        | 192.168.100.2 | 255.255.255.0 | 192.168.100.5                   |
+| DSW1        | 192.168.100.3 | 255.255.255.0 | N/A                             |
+| DSW2        | 192.168.100.4 | 255.255.255.0 | N/A                             |
+
+---
+
+### SVI configurations for the separate VLAN's in area 1
+
+
+
+
+
+
+
+
+
+
+---
+### HSRP configuration
+All of the HSRP configuration have been configured with 
+- version 2
+- preemption
+- Priority=101 for the Active routers 
+- Priority=99 for the standby routers
+
+#### Management HSRP 
+This is configured with the group number 30
+- VIP : **192.168.100.5** 
+- DSW1: Active Router 
+- DSW2 : Standby Router 
+##### Management Standby Status 
+
+<img src="DSW1-Standby.png" width="auto">
+
+<img src="DSW2-Standby.png" width="auto">
+
+
