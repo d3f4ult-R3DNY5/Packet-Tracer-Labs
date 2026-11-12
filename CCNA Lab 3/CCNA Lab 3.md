@@ -127,13 +127,29 @@ The spanning tree protocol that is being used is the default spanning tree proto
 
 ### SVI configurations for the separate VLAN's in area 1
 
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| DSW1        | 10.0.0.2   | 255.255.255.128 | vlan 10        |
+| DSW1        | 10.0.0.130 | 255.255.255.128 | vlan 20        |
+| DSW2        | 10.0.0.3   | 255.255.255.128 | vlan 10        |
+| DSW2        | 10.0.0.131 | 255.255.255.128 | vlan 20        |
 
+---
 
+### Back Bone Area configurations 
 
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| CR1         | 172.16.0.1 | 255.255.255.252 | G0/0           |
+| DSW1        | 172.16.0.2 | 255.255.255.252 | G0/1           |
+| CR1         | 172.16.0.5 | 255.255.255.252 | G0/1           |
+| DSW2        | 172.16.0.6 | 255.255.255.252 | G0/1           |
 
-
-
-
+>[!NOTE]
+>The **G0/1 interfaces** of **DSW1 and DSW2** has been configured with the following command 
+>```CISCO CLI
+>no switchport
+>```
 
 
 ---
@@ -149,10 +165,29 @@ This is configured with the group number 30
 - VIP : **192.168.100.5** 
 - DSW1: Active Router 
 - DSW2 : Standby Router 
-##### Management Standby Status 
 
-<img src="DSW1-Standby.png" width="auto">
+#### Sales HSRP 
+This is configured with the group number 10
+- VIP : **10.0.0.1**
+- DSW1: Active Router 
+- DSW2 : Standby Router 
 
-<img src="DSW2-Standby.png" width="auto">
+#### HR HSRP 
+This is configured with the group number 10
+- VIP : **10.0.0.129**
+- DSW2: Active Router 
+- DSW1 : Standby Router 
+
+##### HSRP status
+###### DSW1
+<img src="DSW1-HSRP.png" width="auto">
+###### DSW2
+<img src="DSW2-HSRP.png" width="auto">
+
+---
+
+### OSPF Configurations
+
+#### Area 0 Configuration 
 
 
