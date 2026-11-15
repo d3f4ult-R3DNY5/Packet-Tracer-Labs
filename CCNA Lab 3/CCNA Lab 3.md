@@ -213,16 +213,24 @@ The spanning tree protocol that is being used is the default spanning tree proto
 ---
 ## Layer 3 Configurations 
 
-### Management IP configurations on the devices 
+###  IP configurations management of all devices on Floor A
 
-| Device name | IP address    | Subnet        | Default Gateway (If Applicable) |
-| ----------- | ------------- | ------------- | ------------------------------- |
-| ASW1        | 192.168.100.1 | 255.255.255.0 | 192.168.100.5                   |
-| ASW2        | 192.168.100.2 | 255.255.255.0 | 192.168.100.5                   |
-| DSW1        | 192.168.100.3 | 255.255.255.0 | N/A                             |
-| DSW2        | 192.168.100.4 | 255.255.255.0 | N/A                             |
+| Device name | IP address    | Subnet        | Default Gateway (If Applicable) | Interface name |
+| ----------- | ------------- | ------------- | ------------------------------- | -------------- |
+| ASW1        | 192.168.100.1 | 255.255.255.0 | 192.168.100.5                   | VLAN 30        |
+| ASW2        | 192.168.100.2 | 255.255.255.0 | 192.168.100.5                   | VLAN 30        |
+| DSW1        | 192.168.100.3 | 255.255.255.0 | N/A                             | VLAN 30        |
+| DSW2        | 192.168.100.4 | 255.255.255.0 | N/A                             | VLAN 30        |
 
----
+###  IP configurations management of all devices on Floor B
+
+| Device name | IP address    | Subnet        | Default Gateway (If Applicable) | Interface name |
+| ----------- | ------------- | ------------- | ------------------------------- | -------------- |
+| ASW3        | 192.168.200.1 | 255.255.255.0 | 192.168.200.5                   | VLAN 30        |
+| ASW4        | 192.168.200.2 | 255.255.255.0 | 192.168.200.5                   | VLAN 30        |
+| DSW3        | 192.168.200.3 | 255.255.255.0 | N/A                             | VLAN 30        |
+| DSW4        | 192.168.200.4 | 255.255.255.0 | N/A                             | VLAN 30        |
+
 
 ### SVI configurations for the separate VLAN's in area 0 (Floor A)
 
@@ -233,9 +241,16 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | DSW2        | 10.0.0.3   | 255.255.255.128 | vlan 10        |
 | DSW2        | 10.0.0.131 | 255.255.255.128 | vlan 20        |
 
----
+### SVI configurations for the separate VLAN's in area 0 (Floor B)
 
-### Back Bone Area configurations 
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| DSW3        | 10.1.0.2   | 255.255.255.128 | vlan 40        |
+| DSW3        | 10.1.0.130 | 255.255.255.128 | vlan 50        |
+| DSW4        | 10.1.0.3   | 255.255.255.128 | vlan 40        |
+| DSW4        | 10.1.0.131 | 255.255.255.128 | vlan 50        |
+
+### Floor A connections (CR1 DSW1 DSW2)
 
 | Device name | IP address | subnet mask     | Interface name |
 | ----------- | ---------- | --------------- | -------------- |
@@ -244,12 +259,20 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | CR1         | 172.16.0.5 | 255.255.255.252 | G0/1           |
 | DSW2        | 172.16.0.6 | 255.255.255.252 | G0/1           |
 
+### Floor B connections (CR2 DSW3 DSW4)
+
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| CR2         | 172.16.2.1 | 255.255.255.252 | G0/0           |
+| DSW3        | 172.16.2.2 | 255.255.255.252 | G0/1           |
+| CR2         | 172.16.2.5 | 255.255.255.252 | G0/1           |
+| DSW4        | 172.16.2.6 | 255.255.255.252 | G0/1           |
+
 >[!NOTE]
->The **G0/1 interfaces** of **DSW1 and DSW2** has been configured with the following command 
+>The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4** has been configured with the following command 
 >```CISCO CLI
 >no switchport
 >```
-
 
 ---
 ### HSRP configuration
@@ -259,34 +282,59 @@ All of the HSRP configuration have been configured with
 - Priority=101 for the Active routers 
 - Priority=99 for the standby routers
 
-#### Management HSRP 
+#### Floor A 
+>[!NOTE]
+>##### Management HSRP 
 This is configured with the group number 30
-- VIP : **192.168.100.5** 
-- DSW1: Active Router 
-- DSW2 : Standby Router 
-
-#### Sales HSRP 
+>- VIP : **192.168.100.5** 
+>- DSW1: Active Router 
+>- DSW2 : Standby Router 
+>
+>##### Sales HSRP 
 This is configured with the group number 10
-- VIP : **10.0.0.1**
-- DSW1: Active Router 
-- DSW2 : Standby Router 
-
-#### HR HSRP 
+>- VIP : **10.0.0.1**
+>- DSW1: Active Router 
+>- DSW2 : Standby Router 
+>
+>##### HR HSRP 
 This is configured with the group number 10
-- VIP : **10.0.0.129**
-- DSW2: Active Router 
-- DSW1 : Standby Router 
+>- VIP : **10.0.0.129**
+>- DSW2: Active Router 
+>- DSW1 : Standby Router 
 
+#### Floor B 
+>[!NOTE]
+>##### Management HSRP 
+This is configured with the group number 30
+>- VIP : **192.168.200.5** 
+>- DSW3: Active Router 
+>- DSW4 : Standby Router 
+>
+>##### Development HSRP 
+This is configured with the group number 40
+>- VIP : **10.1.0.1**
+>- DSW3: Active Router 
+>- DSW4 : Standby Router 
+>
+>##### QA HSRP 
+This is configured with the group number 50
+>- VIP : **10.1.0.129**
+>- DSW4: Active Router 
+>- DSW3 : Standby Router 
 ##### HSRP status
 ###### DSW1
 <img src="DSW1-HSRP.png" width="auto">
 ###### DSW2
 <img src="DSW2-HSRP.png" width="auto">
 
+###### DSW3
+<img src="DSW3-HSRP.png" width="auto">
+
+###### DSW4
+<img src="DSW4-HSRP.png" width="auto">
+
 ---
 
-### OSPF Configurations
 
-#### Area 0 Configuration 
 
 
