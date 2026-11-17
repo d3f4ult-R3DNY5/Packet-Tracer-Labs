@@ -13,24 +13,35 @@
 
 ## Devices 
 
-| DEVICES    | NAME                            |
-| ---------- | ------------------------------- |
-| DSW1       | Distribution Switch 1           |
-| DSW2       | Distribution Switch 2           |
-| DSW3       | Distribution Switch 3           |
-| DSW4       | Distribution Switch 4           |
-| ASW1       | Access Switch 1                 |
-| ASW2       | Access Switch 2                 |
-| ASW3       | Access Switch 3                 |
-| ASW4       | Access Switch 4                 |
-| SALES-PC-1 | Sales Department PC             |
-| SALES-PC-2 | Sales Department PC             |
-| HR-PC-1    | HR Department PC                |
-| HR-PC-2    | HR Department PC                |
-| DEV-PC-1   | Development Department PC       |
-| DEV-PC-2   | Development Department PC       |
-| QA-PC-1    | Quality Assurance Department PC |
-| QA-PC-2    | Quality Assurance Department PC |
+| DEVICES    | NAME                                |
+| ---------- | ----------------------------------- |
+| DSW1       | Distribution Switch 1               |
+| DSW2       | Distribution Switch 2               |
+| DSW3       | Distribution Switch 3               |
+| DSW4       | Distribution Switch 4               |
+| ASW1       | Access Switch 1                     |
+| ASW2       | Access Switch 2                     |
+| ASW3       | Access Switch 3                     |
+| ASW4       | Access Switch 4                     |
+| SALES-PC-1 | Sales Department PC                 |
+| SALES-PC-2 | Sales Department PC                 |
+| HR-PC-1    | HR Department PC                    |
+| HR-PC-2    | HR Department PC                    |
+| DEV-PC-1   | Development Department PC           |
+| DEV-PC-2   | Development Department PC           |
+| QA-PC-1    | Quality Assurance Department PC     |
+| QA-PC-2    | Quality Assurance Department PC     |
+| CS-1       | Core Switch 1                       |
+| CONSW1     | Connection Switch 1                 |
+| ADMIN-PC-1 | Administrator PC                    |
+| ADMIN-PC-2 | Administrator PC                    |
+| DHCP       | Dynamic Host Configuration Protocol |
+| NTP        | Network Time Protocol               |
+| SYSLOG     | Logging information                 |
+| SNMP       | Simple Network Management Protocol  |
+| FTP/TFP    | `[Trivial]`File transfer Protocol   |
+| DNS        | Domain Name System                  |
+
 
 ---
 ## Layer 2 Configurations 
@@ -268,6 +279,15 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | CR2         | 172.16.2.5 | 255.255.255.252 | G0/1           |
 | DSW4        | 172.16.2.6 | 255.255.255.252 | G0/1           |
 
+### Central Switch connections  (CS1 CR1 CR2)
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| CR1         | 172.16.1.2 | 255.255.255.252 | G0/1/0         |
+| CR2         | 172.16.1.6 | 255.255.255.252 | G0/1/0         |
+| CS1         | 172.16.1.1 | 255.255.255.252 | G1/1/1         |
+| CS1         | 172.16.1.5 | 255.255.255.252 | G1/1/2         |
+
+
 >[!NOTE]
 >The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4** has been configured with the following command 
 >```CISCO CLI
@@ -334,6 +354,8 @@ This is configured with the group number 50
 <img src="DSW4-HSRP.png" width="auto">
 
 ---
+
+
 
 
 
