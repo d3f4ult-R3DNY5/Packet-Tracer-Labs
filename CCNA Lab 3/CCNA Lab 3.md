@@ -224,7 +224,7 @@ The spanning tree protocol that is being used is the default spanning tree proto
 ---
 ## Layer 3 Configurations 
 
-###  IP configurations management of all devices on Floor A
+###  IP configuration management of all devices on Floor A
 
 | Device name | IP address    | Subnet        | Default Gateway (If Applicable) | Interface name |
 | ----------- | ------------- | ------------- | ------------------------------- | -------------- |
@@ -233,7 +233,7 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | DSW1        | 192.168.100.3 | 255.255.255.0 | N/A                             | VLAN 30        |
 | DSW2        | 192.168.100.4 | 255.255.255.0 | N/A                             | VLAN 30        |
 
-###  IP configurations management of all devices on Floor B
+###  IP configuration management of all devices on Floor B
 
 | Device name | IP address    | Subnet        | Default Gateway (If Applicable) | Interface name |
 | ----------- | ------------- | ------------- | ------------------------------- | -------------- |
@@ -242,7 +242,18 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | DSW3        | 192.168.200.3 | 255.255.255.0 | N/A                             | VLAN 30        |
 | DSW4        | 192.168.200.4 | 255.255.255.0 | N/A                             | VLAN 30        |
 
+### IP configuration Management for devices in Area 1 
 
+| Device name | IP address  | Subnet        | Default Gateway (If Applicable) | Interface name |
+| ----------- | ----------- | ------------- | ------------------------------- | -------------- |
+| CONSW1      | 192.168.0.1 | 255.255.255.0 | NA                              | VLAN 30        |
+| ADMIN-PC-1  | 192.168.0.2 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| ADMIN-PC-2  | 192.168.0.3 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| DHCP        | 192.168.0.4 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| NTP         | 192.168.0.5 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| SYSLOG      | 192.168.0.6 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| FTP/TFP     | 192.168.0.7 | 255.255.255.0 | 192.168.0.1                     | NIC            |
+| DNS         | 192.168.0.8 | 255.255.255.0 | 192.168.0.1                     | NIC            |
 ### SVI configurations for the separate VLAN's in area 0 (Floor A)
 
 | Device name | IP address | subnet mask     | Interface name |
@@ -287,9 +298,19 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | CS1         | 172.16.1.1 | 255.255.255.252 | G1/1/1         |
 | CS1         | 172.16.1.5 | 255.255.255.252 | G1/1/2         |
 
+### Central Switch connection (CS1 CONSW1)
+
+| Device name | IP address  | subnet mask     | Interface name |
+| ----------- | ----------- | --------------- | -------------- |
+| CS1         | 172.16.1.9  | 255.255.255.252 | G1/0/1         |
+| CONSW1      | 172.16.1.10 | 255.255.255.252 | G0/1/0         |
 
 >[!NOTE]
->The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4** has been configured with the following command 
+>- The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4**
+>- The **G1/1/1 , G1/1/2, G1/0/1 interfaces** of **CS1**
+>- The **G1/0/1 interface** of **CONSW1** 
+>
+>have been configured with the following command
 >```CISCO CLI
 >no switchport
 >```
@@ -355,8 +376,30 @@ This is configured with the group number 50
 
 ---
 
+### OSPF Configuration on all devices 
 
+#### DSW1
+<img src="DSW1-OSPF.png" width="auto">
 
+#### DSW2
+<img src="DSW2-OSPF.png" width="auto">
 
+#### CR1 
+<img src="CR1-OSPF.png" width="auto">
+
+#### CS1 
+<img src="CS1-OSPF.png" width="auto">
+
+#### CONSW1
+<img src="CONSW1-OSPF.png" width="auto">
+
+#### CR2
+<img src="CR2-OSPF.png" width="auto">
+
+#### DSW3
+<img src="DSW3-OSPF.png" width="auto">
+
+#### DSW4
+<img src="DSW4-OSPF.png" width="auto">
 
 
