@@ -13,34 +13,35 @@
 
 ## Devices 
 
-| DEVICES    | NAME                                |
-| ---------- | ----------------------------------- |
-| DSW1       | Distribution Switch 1               |
-| DSW2       | Distribution Switch 2               |
-| DSW3       | Distribution Switch 3               |
-| DSW4       | Distribution Switch 4               |
-| ASW1       | Access Switch 1                     |
-| ASW2       | Access Switch 2                     |
-| ASW3       | Access Switch 3                     |
-| ASW4       | Access Switch 4                     |
-| SALES-PC-1 | Sales Department PC                 |
-| SALES-PC-2 | Sales Department PC                 |
-| HR-PC-1    | HR Department PC                    |
-| HR-PC-2    | HR Department PC                    |
-| DEV-PC-1   | Development Department PC           |
-| DEV-PC-2   | Development Department PC           |
-| QA-PC-1    | Quality Assurance Department PC     |
-| QA-PC-2    | Quality Assurance Department PC     |
-| CS-1       | Core Switch 1                       |
-| CONSW1     | Connection Switch 1                 |
-| ADMIN-PC-1 | Administrator PC                    |
-| ADMIN-PC-2 | Administrator PC                    |
-| DHCP       | Dynamic Host Configuration Protocol |
-| NTP        | Network Time Protocol               |
-| SYSLOG     | Logging information                 |
-| SNMP       | Simple Network Management Protocol  |
-| FTP/TFP    | `[Trivial]`File transfer Protocol   |
-| DNS        | Domain Name System                  |
+| DEVICES    | NAME                                   |
+| ---------- | -------------------------------------- |
+| DSW1       | Distribution Switch 1                  |
+| DSW2       | Distribution Switch 2                  |
+| DSW3       | Distribution Switch 3                  |
+| DSW4       | Distribution Switch 4                  |
+| ASW1       | Access Switch 1                        |
+| ASW2       | Access Switch 2                        |
+| ASW3       | Access Switch 3                        |
+| ASW4       | Access Switch 4                        |
+| SALES-PC-1 | Sales Department PC                    |
+| SALES-PC-2 | Sales Department PC                    |
+| HR-PC-1    | HR Department PC                       |
+| HR-PC-2    | HR Department PC                       |
+| DEV-PC-1   | Development Department PC              |
+| DEV-PC-2   | Development Department PC              |
+| QA-PC-1    | Quality Assurance Department PC        |
+| QA-PC-2    | Quality Assurance Department PC        |
+| CS-1       | Core Switch 1                          |
+| CONSW1     | Connection Switch 1                    |
+| ADMIN-PC-1 | Administrator PC                       |
+| ADMIN-PC-2 | Administrator PC                       |
+| DHCP       | Dynamic Host Configuration Protocol    |
+| NTP        | Network Time Protocol                  |
+| SYSLOG     | Logging information                    |
+| SNMP-NMS-1 | Simple Network Management Protocol NMS |
+| FTP/TFP    | `[Trivial]`File transfer Protocol      |
+| DNS        | Domain Name System                     |
+
 
 
 ---
@@ -305,6 +306,16 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | CS1         | 172.16.1.9  | 255.255.255.252 | G1/0/1         |
 | CONSW1      | 172.16.1.10 | 255.255.255.252 | G0/1/0         |
 
+### Area 0 Loopback configurations (CR1 CR2 CS1)
+
+| Device name | IP address | subnet mask     | Interface name |
+| ----------- | ---------- | --------------- | -------------- |
+| CS1         | 8.8.8.8    | 255.255.255.255 | Loopback 0     |
+| CR1         | 1.1.1.1    | 255.255.255.255 | Loopback 0     |
+| CR2         | 6.6.6.6    | 255.255.255.255 | Loopback 0     |
+
+
+
 >[!NOTE]
 >- The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4**
 >- The **G1/1/1 , G1/1/2, G1/0/1 interfaces** of **CS1**
@@ -402,4 +413,71 @@ This is configured with the group number 50
 #### DSW4
 <img src="DSW4-OSPF.png" width="auto">
 
+---
+## IP services
+
+#### DHCP configuration 
+
+<img src="IP-SERVICE-DHCP.png" width="auto">
+
+>[!note]
+>```
+>ip helper-address 192.168.0.4
+>```
+>The above command has been configured on the devices mentioned below 
+> - DSW1 on interfaces : VLAN 10 , VLAN 20
+> - DSW2 on interfaces : VLAN 10 , VLAN 20
+> - DSW3 on interfaces : VLAN 40 , VLAN 50
+> - DSW4 on interfaces : VLAN 40 , VLAN 50
+
+---
+
+### IP DNS service
+
+<img src="IP-SERVICE-DNS.png" width="auto">
+
+>[!NOTE]
+>command 
+>```
+>(config)#ip domain-name example.com
+>```
+>- The above command has been configured on all networking devices 
+>
+>command
+>```
+>(config)#ip name-server 192.168.0.8
+>(config)#ip domain-lookup 
+>```
+>- The above command has been configured on all of the networking devices except the ones given below 
+>	- ASW1
+>	- ASW2
+>	- ASW3
+>	- ASW4
+
+---
+
+### IP SSH configuration 
+
+>[!note]
+>commands
+>```
+>(config)#crypto key generate rsa general-keys modulus 768
+>(config)#ip ssh version 2
+>(config)#line vty 0 15
+>(line-config)#transport input ssh 
+>```
+>
+>The above commands has been issued on all of the networking interfaces 
+
+---
+### SNMP configurations 
+
+>[!note]
+>commands
+>```
+>(config)#snmp-server community cisco1 ro
+>(config)#snmp-server community cisco2 rw
+>```
+>
+>The above commands has been issued on all of the networking interfaces 
 
