@@ -611,8 +611,19 @@ This is configured with the group number 50
 >
 >The above commands have been configured on all of the networking devices 
 
+---
 ### Access Control List Configurations 
 
+#### Standard ACL configurations 
 
+#### For SSH enabled devices 
+
+>[!NOTE]
+>This access list has been configured on all devices  to limit the SSH access to the following devices 
+>- ADMIN-PC-1
+>- ADMIN-PC-2
+
+###### Configuration 
+<img src="ACL-ADMIN-VTY-ACL.png" width="auto">
 
 
