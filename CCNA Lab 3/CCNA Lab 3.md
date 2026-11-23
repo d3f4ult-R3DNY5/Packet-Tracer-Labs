@@ -570,4 +570,49 @@ This is configured with the group number 50
 #### CS1 NTP
 <img src="CS1-NTP.png" width="auto">
 
+---
+
+### FTP/TFTP Configurations 
+
+#### FTP server configuration 
+<img src="FTP-SERVER.png" width="auto">
+
+>[!NOTE]
+>
+>commands 
+>```
+>(config)# ip ftp username ftp-user
+>(config)# ip ftp password ftp-123
+>(config)# do write memory 
+>(config)# do copy startup-config ftp:
+>```
+>
+>The above commands have been configured on all of the network devices 
+
+---
+
+## Security Configurations 
+
+### Configuring the passwords and secrets 
+
+>[!NOTE]
+>
+>commands 
+>```
+>(config)# service password-encryption
+>(config)# enable password cisco
+>(config)# enable secret ccna
+>(config)# username admin secret ccna 
+>(config)# line console 0
+>(config-line)# login local
+>(config)# line vty 0 15 
+>(config-line)# login local  
+>```
+>
+>The above commands have been configured on all of the networking devices 
+
+### Access Control List Configurations 
+
+
+
 
