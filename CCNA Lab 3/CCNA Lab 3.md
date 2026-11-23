@@ -481,3 +481,93 @@ This is configured with the group number 50
 >
 >The above commands has been issued on all of the networking interfaces 
 
+---
+
+### Syslog configuration 
+
+>[!note]
+>commands 
+>
+>```
+>(config)#logging host 192.168.0.6
+>(config)#logging trap debugging 
+>(config)#service timestamps log datetime msec
+>```
+>
+>The above commands has been configured on all of the network devices 
+
+>[!WARNING]
+>- Syslog doesn't appear to be configured or logging properly pausing the syslog configuration for now and moving ahead 
+
+---
+
+### NTP configurations 
+
+>[!NOTE]
+>
+>commands 
+>```
+>(config)# ntp server 192.168.0.5 key 1
+>(config)# ntp authenticate
+>(config)# ntp authentication-key 1 md5 ntp-server
+>(config)# ntp trusted-key 1
+>(config)# ntp master  
+>(config)# ntp authentication-key 2 md5 master-server
+>(config)# ntp trusted-key 2
+>```
+>
+>The above commands has been configured on CONSW1 
+>
+>commands 
+>```
+>(config)# ntp authenticate
+>(config)# ntp authentication-key 2 md5 master-server
+>(config)# ntp trusted-key 2
+>(config)# ntp server 172.16.1.10 key 2
+>(config)# ntp master 10
+>(config)# ntp authentication-key 3 md5 cs-server
+>(config)# ntp trusted-key 3
+>```
+>
+>The above command has been configured on the switch CS1 
+>
+>commands 
+>```
+>config# ntp authenticate
+>config# ntp authentication-key 3 md5 cs-server
+>config# ntp trusted-key 3
+>config# ntp server 172.16.1.1 key 3
+>```
+>
+> The above commands have been configured on the following devices
+> - CR1
+> - DSW1
+> - DSW2
+> - ASW1
+> - ASW2
+> 
+> commands 
+>```
+>(config)# ntp authenticate
+>(config)# ntp authentication-key 3 md5 cs-server
+>(config)# ntp trusted-key 3
+>(config)# ntp server 172.16.1.5 key 3
+>```
+>
+> The above commands have been configured on the following devices
+> - CR2
+> - DSW3
+> - DSW4
+> - ASW3
+> - ASW4
+
+#### Floor B  NTP 
+<img src="FLOOR-B-NTP.png" width="auto">
+
+#### Floor A NTP 
+<img src="FLOOR-A-NTP.png" width="auto">
+
+#### CS1 NTP
+<img src="CS1-NTP.png" width="auto">
+
+
