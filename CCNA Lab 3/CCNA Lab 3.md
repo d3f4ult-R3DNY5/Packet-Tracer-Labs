@@ -622,8 +622,51 @@ This is configured with the group number 50
 >This access list has been configured on all devices  to limit the SSH access to the following devices 
 >- ADMIN-PC-1
 >- ADMIN-PC-2
+>###### Configuration 
+><img src="ACL-ADMIN-VTY-ACL.png" width="auto">
 
-###### Configuration 
-<img src="ACL-ADMIN-VTY-ACL.png" width="auto">
+#### Extended ACL configuration 
 
+#### ACL configuration - VLAN 10 (Sales)
+
+>[!NOTE]
+>- **Devices & Interface:** Configured extended ACL `ACL_VLAN10_IN` on `DSW1` and `DSW2`, applied inbound (`in`) on `interface Vlan10`
+>- **Permitted Services:** DHCP (`bootps`), DNS (`192.168.0.8`), NTP (`192.168.0.5`), Syslog (`192.168.0.6`), SNMP (`any eq snmp`), and general traffic (`permit ip any any`)
+>- **Blocked Subnets:** Management networks `192.168.100.0/24`, `192.168.200.0/24`, and `192.168.0.0/24`
+>
+>###### Configuration 
+><img src="ACL-VLAN10-IN.png" width="auto">
+
+#### ACL Configuration — VLAN 20 (HR)
+
+>[!NOTE]
+>- **Devices & Interface:** Configured extended ACL `ACL_VLAN20_IN` on `DSW1` and `DSW2`, applied inbound (`in`) on `interface Vlan20`
+>- **Source Subnet:** HR subnet `10.0.0.128/25` (`10.0.0.128 0.0.0.127`)
+>- **Permitted Services:** DHCP (`bootps`), DNS (`192.168.0.8`), NTP (`192.168.0.5`), Syslog (`192.168.0.6`), SNMP (`any eq snmp`), and general traffic (`permit ip any any`)
+>- **Blocked Subnets:** Management networks `192.168.100.0/24`, `192.168.200.0/24`, and `192.168.0.0/24`
+>
+>###### configuration 
+><img src="ACL-VLAN20-IN.png" width="auto">
+
+#### ACL Configuration — VLAN 40 (Dev)
+
+>[!NOTE]
+>- **Devices & Interface:** Configured extended ACL `ACL_VLAN40_IN` on `DSW3` and `DSW4`, applied inbound (`in`) on `interface Vlan40`
+>- **Source Subnet:** Dev subnet `10.1.0.0/25` (`10.1.0.0 0.0.0.127`)
+>- **Permitted Services:** DHCP (`bootps`), DNS (`192.168.0.8`), NTP (`192.168.0.5`), Syslog (`192.168.0.6`), SNMP (`any eq snmp`), and general traffic (`permit ip any any`)
+>- **Blocked Subnets:** Management networks `192.168.100.0/24`, `192.168.200.0/24`, and `192.168.0.0/24`
+>
+>###### configuration
+><img src="ACL-VLAN40-IN.png" width="auto">
+
+#### ACL Configuration — VLAN 50 (QA)
+
+>[!note]
+>- **Devices & Interface:** Configured extended ACL `ACL_VLAN50_IN` on `DSW3` and `DSW4`, applied inbound (`in`) on `interface Vlan50`
+>- **Source Subnet:** QA subnet `10.1.0.128/25` (`10.1.0.128 0.0.0.127`)
+>- **Permitted Services:** DHCP (`bootps`), DNS (`192.168.0.8`), NTP (`192.168.0.5`), Syslog (`192.168.0.6`), SNMP (`any eq snmp`), and general traffic (`permit ip any any`)
+>- **Blocked Subnets:** Management networks `192.168.100.0/24`, `192.168.200.0/24`, and `192.168.0.0/24`
+>
+>###### configurations
+><img src="ACL-VLAN50-IN.png" width="auto">
 
