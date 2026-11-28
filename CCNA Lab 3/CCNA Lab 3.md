@@ -225,6 +225,22 @@ The spanning tree protocol that is being used is the default spanning tree proto
 >[!NOTE]
 >For the VLAN 404 There is no proper spanning tree root as the trunk interfaces do not carry traffic for VLAN 404 
 
+>[!NOTE]
+>command 
+>```
+>(config-if) # spanning-tree portfast
+>(config-if) # spanning-tree bpduguard enable
+>(config-if) # spanning-tree bpdufilter enable
+>```
+>The following command has been configured has configured on the interfaces **F0/10 and F0/11** on all of the following devices 
+>- ASW1
+>- ASW2
+>- ASW3
+>- ASW4
+
+
+
+
 ---
 ## Layer 3 Configurations 
 
