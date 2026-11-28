@@ -41,6 +41,9 @@
 | SNMP-NMS-1 | Simple Network Management Protocol NMS |
 | FTP/TFP    | `[Trivial]`File transfer Protocol      |
 | DNS        | Domain Name System                     |
+| ISP        | ISP Router                             |
+| CER        | Customer Edge Router                   |
+
 
 
 
@@ -314,7 +317,19 @@ The spanning tree protocol that is being used is the default spanning tree proto
 | CR1         | 1.1.1.1    | 255.255.255.255 | Loopback 0     |
 | CR2         | 6.6.6.6    | 255.255.255.255 | Loopback 0     |
 
+### Area 0 IP configuration (ISP CS1)
 
+| Device name | IP address  | subnet mask     | Interface name |
+| ----------- | ----------- | --------------- | -------------- |
+| CS1         | 172.16.1.13 | 255.255.255.252 | G1/1/3         |
+| CER         | 172.16.1.14 | 255.255.255.252 | G0/1/0         |
+
+### IP configuration (ISP CER)
+
+| Device name | IP address  | subnet mask     | Interface name |
+| ----------- | ----------- | --------------- | -------------- |
+| ISP         | 203.0.113.1 | 255.255.255.252 | G0/0           |
+| CER         | 203.0.113.2 | 255.255.255.252 | G0/0           |
 
 >[!NOTE]
 >- The **G0/1 interfaces** of **DSW1, DSW2, DSW3 and DSW4**
@@ -401,6 +416,12 @@ This is configured with the group number 50
 #### CS1 
 <img src="CS1-OSPF.png" width="auto">
 
+
+>[!NOTE]
+>**CS1** has been configured with the following command given below 
+>```
+>(config-router) # default-information orginate
+>```
 #### CONSW1
 <img src="CONSW1-OSPF.png" width="auto">
 
@@ -412,6 +433,9 @@ This is configured with the group number 50
 
 #### DSW4
 <img src="DSW4-OSPF.png" width="auto">
+
+
+
 
 ---
 ## IP services
@@ -520,6 +544,15 @@ This is configured with the group number 50
 >
 >commands 
 >```
+>(config)# ntp server 172.16.1.13 key 2
+>(config)# ntp authentication-key 2 md5 master-server
+>(config)# ntp trusted-key 2
+>```
+>
+>The above commands has been configured on CER
+>
+>commands 
+>```
 >(config)# ntp authenticate
 >(config)# ntp authentication-key 2 md5 master-server
 >(config)# ntp trusted-key 2
@@ -611,6 +644,21 @@ This is configured with the group number 50
 >
 >The above commands have been configured on all of the networking devices 
 
+### Configuring the password on the ISP router 
+
+commands 
+>```
+>(config)# service password-encryption
+>(config)# enable password cisco
+>(config)# enable secret ccna
+>(config)# username verizon secret ccna 
+>(config)# line console 0
+>(config-line)# login local
+>```
+>
+>The above command has been configured on the ISP 
+
+
 ---
 ### Access Control List Configurations 
 
@@ -670,3 +718,38 @@ This is configured with the group number 50
 >###### configurations
 ><img src="ACL-VLAN50-IN.png" width="auto">
 
+---
+### Configuring the IP NAT translations 
+
+>[!NOTE]
+>- The configurations has been performed on the CS1 device 
+
+>[!WARNING]
+>- Initially this failed due to packet tracers limitations of the multilayered switch not being able to support the **no switchport command**
+>
+>**The Fix**
+>- This was to simply add another router **CE (Customer Edge Router) to the network** 
+
+>[!NOTE]
+>The following commands were performed on CER
+>
+>commands
+> 
+>```
+>CER(config-router)#int G0/1/0
+>CER(config-if)#ip nat inside
+>CER(config-if)#int G0/0
+>CER(config-if)#ip nat outside
+>```
+>
+>NAT ACL configured on CER is given below 
+><img src="CER-NAT-ACL.png" width="auto">
+>
+>To apply the NAT to the outside interface the following command has been configured
+> 
+>NAT configuration type : PAT (Port Address translation)
+>
+>command 
+>```
+>CER(config)#ip nat inside source list NAT_ACL interface G0/0 overload
+>```
